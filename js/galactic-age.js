@@ -7,13 +7,10 @@ export class Person {
     let today = new Date();
     let birthDate = new Date(this.birth);
     let months =  (today.getMonth() - birthDate.getMonth()) / 12;
-    console.log(`${months} months`);
-    let ageDiff = (today.getFullYear() - birthDate.getFullYear()) + months;
-    console.log(ageDiff);
-
-
+    let ageDiff = parseFloat(((today.getFullYear() - birthDate.getFullYear()) + months).toFixed(1));
     let userAgeInSec = this.yearInSec() * ageDiff;
-    return userAgeInSec;
+
+    return ageDiff;
   }
 
   yearInSec() {
