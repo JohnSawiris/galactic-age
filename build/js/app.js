@@ -77,8 +77,24 @@ var Person = exports.Person = function () {
 },{}],2:[function(require,module,exports){
 'use strict';
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 var _galacticAge = require('./../js/galactic-age.js');
 
-$(document).ready(function () {});
+$(document).ready(function () {
+  $('#result').hide();
+  $('#age').submit(function (event) {
+    event.preventDefault();
+    var age = $('#user-age').val();
+    var planet = $('#planet').val();
+    var user = new _galacticAge.Person(age, planet);
+
+    $('#result').fadeIn(800, function () {
+      $(this).text('You\'re ' + user.planetYear() + ' years old on ' + user.planet);
+    });
+    console.log(typeof age === 'undefined' ? 'undefined' : _typeof(age));
+    console.log(planet);
+  });
+});
 
 },{"./../js/galactic-age.js":1}]},{},[2]);
