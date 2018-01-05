@@ -33,6 +33,7 @@ export class Person {
     const mercury = 1 / 0.24;
     const venus = 1 / 0.62;
     const mars = 1 / 1.88;
+    console.log(mars*earthAge);
     const jupiter = 1 / 11.86;
 
     if(this.planet === "mercury") {
@@ -42,10 +43,10 @@ export class Person {
       planetAge = (earthAge * venus).toFixed(2);
       return parseFloat(planetAge);
     } else if(this.planet === "mars") {
-      planetAge = (earthAge / mars).toFixed(2);
+      planetAge = (earthAge * mars).toFixed(2);
       return parseFloat(planetAge);
     } else if(this.planet === "jupiter") {
-      planetAge = (earthAge / jupiter).toFixed(2);
+      planetAge = (earthAge * jupiter).toFixed(2);
       return parseFloat(planetAge);
     } else {
       return earthAge;

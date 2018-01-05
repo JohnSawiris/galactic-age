@@ -12,5 +12,18 @@ describe('Person', function() {
     expect(user.planetYear()).toEqual(116.67);
   });
 
-  
+  it('should take in birthdate and planet, in this case venus return 45.16', function() {
+    let user = new Person("11-18-1989", "venus");
+    expect(user.planetYear()).toEqual(45.16);
+  });
+
+  it('should take in birthdate and planet, in this case mars return 14.89', function() {
+    let user = new Person("11-18-1989", "mars");
+    expect(user.planetYear()).toEqual(14.89);
+  });
+
+  it('should take in birthdate and planet, in this case jupiter return 2.36', function() {
+    let user = new Person("11-18-1989", "jupiter");
+    expect(user.planetYear()).toEqual(2.36);
+  });
 });
