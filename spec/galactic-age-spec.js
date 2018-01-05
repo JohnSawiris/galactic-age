@@ -1,7 +1,8 @@
 import { Person } from './../js/galactic-age.js';
 describe('Person', function() {
-  it('should retrun the user\'s age', function() {
-    var user = new Person(20);
-    expect(user.covertAge()).toEqual(20);
+
+  it('should take in birthdate and return age in seconds', function() {
+    var user = new Person("11-18-1989");
+    expect(user.covertAge()).toEqual(888264000);
   });
 });
