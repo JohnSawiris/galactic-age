@@ -1,11 +1,12 @@
 export class Person {
+  //class constructor
   constructor(birth, planet) {
-    this.birth = birth
+    this.birth = birth;
     this.planet = planet;
   }
 
+  //returns years difference
   convertAge() {
-    //returns years difference
     let today = new Date();
     let birthDate = new Date(this.birth);
     let months =  (today.getMonth() - birthDate.getMonth()) / 12;
@@ -15,8 +16,8 @@ export class Person {
     return ageDiff;
   }
 
+  //return year in seconds
   yearInSec() {
-    //return year in seconds
     const minsInSec = 60,
      hrInSec = minsInSec * minsInSec,
      dayInSec = hrInSec* 24,
@@ -29,11 +30,9 @@ export class Person {
     //return planet year
     let planetAge = 0;
     let earthAge = this.convertAge();
-    console.log(earthAge);
     const mercury = 1 / 0.24;
     const venus = 1 / 0.62;
     const mars = 1 / 1.88;
-    console.log(mars*earthAge);
     const jupiter = 1 / 11.86;
 
     if(this.planet === "mercury") {

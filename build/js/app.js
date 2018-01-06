@@ -10,6 +10,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Person = exports.Person = function () {
+  //class constructor
   function Person(birth, planet) {
     _classCallCheck(this, Person);
 
@@ -17,10 +18,12 @@ var Person = exports.Person = function () {
     this.planet = planet;
   }
 
+  //returns years difference
+
+
   _createClass(Person, [{
     key: "convertAge",
     value: function convertAge() {
-      //returns years difference
       var today = new Date();
       var birthDate = new Date(this.birth);
       var months = (today.getMonth() - birthDate.getMonth()) / 12;
@@ -29,10 +32,12 @@ var Person = exports.Person = function () {
 
       return ageDiff;
     }
+
+    //return year in seconds
+
   }, {
     key: "yearInSec",
     value: function yearInSec() {
-      //return year in seconds
       var minsInSec = 60,
           hrInSec = minsInSec * minsInSec,
           dayInSec = hrInSec * 24,
@@ -46,11 +51,9 @@ var Person = exports.Person = function () {
       //return planet year
       var planetAge = 0;
       var earthAge = this.convertAge();
-      console.log(earthAge);
       var mercury = 1 / 0.24;
       var venus = 1 / 0.62;
       var mars = 1 / 1.88;
-      console.log(mars * earthAge);
       var jupiter = 1 / 11.86;
 
       if (this.planet === "mercury") {
@@ -77,23 +80,19 @@ var Person = exports.Person = function () {
 },{}],2:[function(require,module,exports){
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
 var _galacticAge = require('./../js/galactic-age.js');
 
 $(document).ready(function () {
   $('#result').hide();
   $('#age').submit(function (event) {
     event.preventDefault();
-    var age = $('#user-age').val();
-    var planet = $('#planet').val();
-    var user = new _galacticAge.Person(age, planet);
+    var age = $('#user-age').val().toLowerCase(),
+        planet = $('#planet').val().toLowerCase(),
+        user = new _galacticAge.Person(age, planet);
 
-    $('#result').fadeIn(800, function () {
+    $('#result').fadeIn(100, function () {
       $(this).text('You\'re ' + user.planetYear() + ' years old on ' + user.planet);
     });
-    console.log(typeof age === 'undefined' ? 'undefined' : _typeof(age));
-    console.log(planet);
   });
 });
 
