@@ -16,6 +16,10 @@ var Person = exports.Person = function () {
 
     this.birth = birth;
     this.planet = planet;
+    this.mercury = 1 / 0.24;
+    this.venus = 1 / 0.62;
+    this.mars = 1 / 1.88;
+    this.jupiter = 1 / 11.86;
   }
 
   //returns years difference
@@ -24,11 +28,11 @@ var Person = exports.Person = function () {
   _createClass(Person, [{
     key: "convertAge",
     value: function convertAge() {
-      var today = new Date();
-      var birthDate = new Date(this.birth);
-      var months = (today.getMonth() - birthDate.getMonth()) / 12;
-      var ageDiff = parseFloat(today.getFullYear() - birthDate.getFullYear() + months);
-      var userAgeInSec = this.yearInSec() * ageDiff;
+      var today = new Date(),
+          birthDate = new Date(this.birth),
+          months = (today.getMonth() - birthDate.getMonth()) / 12,
+          ageDiff = parseFloat(today.getFullYear() - birthDate.getFullYear() + months),
+          userAgeInSec = this.yearInSec() * ageDiff;
 
       return ageDiff.toFixed(2);
     }
@@ -49,29 +53,21 @@ var Person = exports.Person = function () {
     key: "planetYear",
     value: function planetYear() {
       //return planet year
-      var planetAge = 0;
-      var planet = this.planet;
-      var earthAge = this.convertAge();
-      var mercury = 1 / 0.24;
-      var venus = 1 / 0.62;
-      var mars = 1 / 1.88;
-      var jupiter = 1 / 11.86;
+      var planetAge = this.convertAge(),
+          planet = this.planet;
 
       if (planet === "mercury") {
-        planetAge = (earthAge * mercury).toFixed(2);
-        return parseFloat(planetAge);
+        planetAge = (planetAge * this.mercury).toFixed(2);
       } else if (planet === "venus") {
-        planetAge = (earthAge * venus).toFixed(2);
-        return parseFloat(planetAge);
+        planetAge = (planetAge * this.venus).toFixed(2);
       } else if (planet === "mars") {
-        planetAge = (earthAge * mars).toFixed(2);
-        return parseFloat(planetAge);
+        planetAge = (planetAge * this.mars).toFixed(2);
       } else if (planet === "jupiter") {
-        planetAge = (earthAge * jupiter).toFixed(2);
-        return parseFloat(planetAge);
+        planetAge = (planetAge * this.jupiter).toFixed(2);
       } else {
-        return parseFloat(earthAge);
+        return parseFloat(planetAge).toFixed(2);
       }
+      return parseFloat(planetAge);
     }
 
     //life expectancy according to 2014 average 71.5 yrs
@@ -79,11 +75,49 @@ var Person = exports.Person = function () {
   }, {
     key: "lifeExpectancy",
     value: function lifeExpectancy() {
-      var worldAverage = 71.5;
-      var planetYear = this.planetYear();
-      var lifeExpectancy = worldAverage - planetYear;
+      var earthAvg = 71.5,
+          mercuryAvg = earthAvg * this.mercury,
+          venusAvg = earthAvg * this.venus,
+          marsAvg = earthAvg * this.mars,
+          jupiterAvg = earthAvg * this.jupiter;
 
-      return parseFloat(lifeExpectancy);
+      var planet = this.planet,
+          ageOnPlanet = this.planetYear(),
+          lifeExpectancy = 0;
+
+      if (planet === "mercury") {
+        if (ageOnPlanet > mercuryAvg) {
+          return 'you\'re dead';
+        } else {
+          lifeExpectancy = mercuryAvg - ageOnPlanet;
+        }
+      } else if (planet === "venus") {
+        if (ageOnPlanet > venusAvg) {
+          return 'you\'re dead';
+        } else {
+          lifeExpectancy = venusAvg - ageOnPlanet;
+        }
+      } else if (planet === "mars") {
+        if (ageOnPlanet > marsAvg) {
+          return 'you\'re dead';
+        } else {
+          lifeExpectancy = marsAvg - ageOnPlanet;
+        }
+      } else if (planet === "jupiter") {
+        if (ageOnPlanet > jupiterAvg) {
+          return 'you\'re dead';
+        } else {
+          lifeExpectancy = jupiterAvg - ageOnPlanet;
+        }
+      } else {
+        if (ageOnPlanet > earthAvg) {
+          return 'you\'re dead';
+        } else {
+          lifeExpectancy = earthAvg - ageOnPlanet;
+        }
+      }
+
+      return parseFloat(lifeExpectancy.toFixed(2));
     }
   }]);
 
@@ -104,7 +138,7 @@ $(document).ready(function () {
         user = new _galacticAge.Person(age, planet);
 
     $('#result').fadeIn(100, function () {
-      $(this).text('You\'re ' + user.planetYear() + ' years old on ' + user.planet);
+      $(this).text('\n        You\'re ' + user.planetYear() + ' years old on ' + user.planet + ', and life expectancy on this planet is ' + user.lifeExpectancy() + ' years\n      ');
     });
   });
 });

@@ -11,11 +11,11 @@ export class Person {
 
   //returns years difference
   convertAge() {
-    let today = new Date();
-    let birthDate = new Date(this.birth);
-    let months =  (today.getMonth() - birthDate.getMonth()) / 12;
-    let ageDiff = parseFloat(((today.getFullYear() - birthDate.getFullYear()) + months));
-    let userAgeInSec = this.yearInSec() * ageDiff;
+    let today = new Date(),
+        birthDate = new Date(this.birth),
+        months =  (today.getMonth() - birthDate.getMonth()) / 12,
+        ageDiff = parseFloat(((today.getFullYear() - birthDate.getFullYear()) + months)),
+        userAgeInSec = this.yearInSec() * ageDiff;
 
     return ageDiff.toFixed(2);
   }
@@ -32,8 +32,8 @@ export class Person {
 
   planetYear() {
     //return planet year
-    let planetAge = this.convertAge();
-    let planet = this.planet;
+    let planetAge = this.convertAge(),
+        planet = this.planet;
 
     if(planet === "mercury") {
        planetAge = (planetAge * this.mercury).toFixed(2);
@@ -51,15 +51,15 @@ export class Person {
 
   //life expectancy according to 2014 average 71.5 yrs
   lifeExpectancy() {
-    const earthAvg = 71.5;
-    const mercuryAvg = earthAvg * this.mercury;
-    const venusAvg = earthAvg * this.venus;
-    const marsAvg = earthAvg * this.mars;
-    const jupiterAvg = earthAvg * this.jupiter;
+    const earthAvg = 71.5,
+          mercuryAvg = earthAvg * this.mercury,
+          venusAvg = earthAvg * this.venus,
+          marsAvg = earthAvg * this.mars,
+          jupiterAvg = earthAvg * this.jupiter;
 
-    let planet = this.planet;
-    let ageOnPlanet = this.planetYear();
-    let lifeExpectancy = 0;
+    let planet = this.planet,
+        ageOnPlanet = this.planetYear(),
+        lifeExpectancy = 0;
 
     if(planet === "mercury") {
       if(ageOnPlanet > mercuryAvg) {

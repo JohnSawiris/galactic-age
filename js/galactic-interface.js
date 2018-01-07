@@ -9,7 +9,9 @@ $(document).ready(function() {
         user = new Person(age, planet);
 
     $('#result').fadeIn(100, function() {
-      $(this).text(`You're ${user.planetYear()} years old on ${user.planet}`);
+      $(this).text(`
+        You're ${user.planetYear()} years old on ${user.planet}, and life expectancy on this planet is ${user.lifeExpectancy()} years
+      `);
     });
   });
 });
