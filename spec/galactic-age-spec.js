@@ -9,7 +9,7 @@ describe('Person', function() {
 
   it('should take in birthdate and planet, in this case earth return 28.17', function() {
     let user = new Person("11-18-1989", "earth");
-    expect(user.planetYear()).toEqual(28.17);
+    expect(user.planetYear()).toEqual('28.17');
   });
 
   it('should take in birthdate and planet, in this case mercury return 116.67', function() {
@@ -35,5 +35,15 @@ describe('Person', function() {
   it('should return 43.33 earth yrs for life expectancy', function() {
     let user = new Person("11-18-1989", "earth");
     expect(user.lifeExpectancy()).toEqual(43.33);
+  });
+
+  it('should return should return age', function() {
+    let user = new Person("06-14-1989", "mercury");
+    expect(user.lifeExpectancy()).toEqual(178.84);
+  });
+
+  it('should return should return you\'re dead, because it\'s over the life expectancy', function() {
+    let user = new Person("06-14-1945", "mercury");
+    expect(user.lifeExpectancy()).toEqual('you\'re dead');
   });
 });
