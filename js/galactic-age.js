@@ -57,13 +57,9 @@ export class Person {
     const marsAvg = earthAvg * this.mars;
     const jupiterAvg = earthAvg * this.jupiter;
 
-    console.log(mercuryAvg.toFixed(2));
-
     let planet = this.planet;
     let ageOnPlanet = this.planetYear();
     let lifeExpectancy = 0;
-
-    console.log(ageOnPlanet);
 
     if(planet === "mercury") {
       if(ageOnPlanet > mercuryAvg) {
@@ -97,7 +93,6 @@ export class Person {
       }
     }
 
-    console.log(lifeExpectancy);
     return parseFloat(lifeExpectancy.toFixed(2));
   }
 
