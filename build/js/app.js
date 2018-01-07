@@ -27,10 +27,10 @@ var Person = exports.Person = function () {
       var today = new Date();
       var birthDate = new Date(this.birth);
       var months = (today.getMonth() - birthDate.getMonth()) / 12;
-      var ageDiff = Math.round(today.getFullYear() - birthDate.getFullYear() + months);
+      var ageDiff = parseFloat(today.getFullYear() - birthDate.getFullYear() + months);
       var userAgeInSec = this.yearInSec() * ageDiff;
 
-      return ageDiff;
+      return ageDiff.toFixed(2);
     }
 
     //return year in seconds
@@ -50,32 +50,45 @@ var Person = exports.Person = function () {
     value: function planetYear() {
       //return planet year
       var planetAge = 0;
+      var planet = this.planet;
       var earthAge = this.convertAge();
       var mercury = 1 / 0.24;
       var venus = 1 / 0.62;
       var mars = 1 / 1.88;
       var jupiter = 1 / 11.86;
 
-      if (this.planet === "mercury") {
+      if (planet === "mercury") {
         planetAge = (earthAge * mercury).toFixed(2);
         return parseFloat(planetAge);
-      } else if (this.planet === "venus") {
+      } else if (planet === "venus") {
         planetAge = (earthAge * venus).toFixed(2);
         return parseFloat(planetAge);
-      } else if (this.planet === "mars") {
+      } else if (planet === "mars") {
         planetAge = (earthAge * mars).toFixed(2);
         return parseFloat(planetAge);
-      } else if (this.planet === "jupiter") {
+      } else if (planet === "jupiter") {
         planetAge = (earthAge * jupiter).toFixed(2);
         return parseFloat(planetAge);
       } else {
-        return earthAge;
+        return parseFloat(earthAge);
       }
+    }
+
+    //life expectancy according to 2014 average 71.5 yrs
+
+  }, {
+    key: "lifeExpectancy",
+    value: function lifeExpectancy() {
+      var worldAverage = 71.5;
+      var planetYear = this.planetYear();
+      var lifeExpectancy = worldAverage - planetYear;
+
+      return parseFloat(lifeExpectancy);
     }
   }]);
 
   return Person;
-}();
+}(); //Class ends
 
 },{}],2:[function(require,module,exports){
 'use strict';

@@ -10,10 +10,10 @@ export class Person {
     let today = new Date();
     let birthDate = new Date(this.birth);
     let months =  (today.getMonth() - birthDate.getMonth()) / 12;
-    let ageDiff = Math.round(((today.getFullYear() - birthDate.getFullYear()) + months));
+    let ageDiff = parseFloat(((today.getFullYear() - birthDate.getFullYear()) + months));
     let userAgeInSec = this.yearInSec() * ageDiff;
 
-    return ageDiff;
+    return ageDiff.toFixed(2);
   }
 
   //return year in seconds
@@ -29,27 +29,39 @@ export class Person {
   planetYear() {
     //return planet year
     let planetAge = 0;
+    let planet = this.planet;
     let earthAge = this.convertAge();
     const mercury = 1 / 0.24;
     const venus = 1 / 0.62;
     const mars = 1 / 1.88;
     const jupiter = 1 / 11.86;
 
-    if(this.planet === "mercury") {
+    if(planet === "mercury") {
        planetAge = (earthAge * mercury).toFixed(2);
        return parseFloat(planetAge);
-    } else if(this.planet === "venus") {
+    } else if(planet === "venus") {
       planetAge = (earthAge * venus).toFixed(2);
       return parseFloat(planetAge);
-    } else if(this.planet === "mars") {
+    } else if(planet === "mars") {
       planetAge = (earthAge * mars).toFixed(2);
       return parseFloat(planetAge);
-    } else if(this.planet === "jupiter") {
+    } else if(planet === "jupiter") {
       planetAge = (earthAge * jupiter).toFixed(2);
       return parseFloat(planetAge);
     } else {
-      return earthAge;
+      return parseFloat(earthAge);
     }
+
   }
 
-}
+  //life expectancy according to 2014 average 71.5 yrs
+
+  lifeExpectancy() {
+    const worldAverage = 71.5;
+    let planetYear = this.planetYear();
+    let lifeExpectancy = worldAverage - planetYear;
+
+    return parseFloat(lifeExpectancy);
+  }
+
+}//Class ends
