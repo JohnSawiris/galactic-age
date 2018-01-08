@@ -4,12 +4,12 @@ describe('Person', function() {
 
   it('should take in birthdate and return age in earth years', function() {
     let user = new Person("11-18-1989");
-    expect(user.convertAge()).toEqual('28.17');
+    expect(user.convertAge()).toEqual(28.17);
   });
 
   it('should take in birthdate and planet, in this case earth return 28.17', function() {
     let user = new Person("11-18-1989", "earth");
-    expect(user.planetYear()).toEqual('28.17');
+    expect(user.planetYear()).toEqual(28.17);
   });
 
   it('should take in birthdate and planet, in this case mercury return 116.67', function() {

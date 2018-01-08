@@ -17,7 +17,7 @@ export class Person {
         ageDiff = parseFloat(((today.getFullYear() - birthDate.getFullYear()) + months)),
         userAgeInSec = this.yearInSec() * ageDiff;
 
-    return ageDiff.toFixed(2);
+    return parseFloat(ageDiff.toFixed(2));
   }
 
   //return year in seconds
@@ -30,23 +30,34 @@ export class Person {
     return yrInSec;
   }
 
+  //return planet year
   planetYear() {
-    //return planet year
     let planetAge = this.convertAge(),
         planet = this.planet;
 
     if(planet === "mercury") {
-       planetAge = (planetAge * this.mercury).toFixed(2);
+       planetAge = (planetAge * this.mercury);
     } else if(planet === "venus") {
-      planetAge = (planetAge * this.venus).toFixed(2);
+      planetAge = (planetAge * this.venus);
     } else if(planet === "mars") {
-      planetAge = (planetAge * this.mars).toFixed(2);
+      planetAge = (planetAge * this.mars);
     } else if(planet === "jupiter") {
-      planetAge = (planetAge * this.jupiter).toFixed(2);
+      planetAge = (planetAge * this.jupiter);
     } else {
-      return parseFloat(planetAge).toFixed(2);
+      parseFloat(planetAge);
     }
-    return parseFloat(planetAge);
+    return parseFloat(planetAge.toFixed(2));
+  }
+
+  // checks life expectancy on chosen planet
+  checkMortality(age, agePlanet) {
+    let lifeExpectancy = 0;
+    if(age > agePlanet) {
+      return 'you\'re dead';
+    } else {
+      lifeExpectancy = agePlanet - age;
+      return parseFloat(lifeExpectancy.toFixed(2));
+    }
   }
 
   //life expectancy according to 2014 average 71.5 yrs
@@ -58,42 +69,18 @@ export class Person {
           jupiterAvg = earthAvg * this.jupiter;
 
     let planet = this.planet,
-        ageOnPlanet = this.planetYear(),
-        lifeExpectancy = 0;
+        ageOnPlanet = this.planetYear();
 
     if(planet === "mercury") {
-      if(ageOnPlanet > mercuryAvg) {
-        return 'you\'re dead';
-      } else {
-        lifeExpectancy = mercuryAvg - ageOnPlanet;
-      }
+      return this.checkMortality(ageOnPlanet, mercuryAvg);
     } else if(planet === "venus") {
-      if(ageOnPlanet > venusAvg) {
-        return 'you\'re dead';
-      } else {
-        lifeExpectancy = venusAvg - ageOnPlanet;
-      }
+      return this.checkMortality(ageOnPlanet, venusAvg);
     } else if(planet === "mars") {
-      if(ageOnPlanet > marsAvg) {
-        return 'you\'re dead';
-      } else {
-        lifeExpectancy = marsAvg - ageOnPlanet;
-      }
+      return this.checkMortality(ageOnPlanet,  marsAvg);
     } else if(planet === "jupiter") {
-      if(ageOnPlanet > jupiterAvg) {
-        return 'you\'re dead';
-      } else {
-        lifeExpectancy = jupiterAvg - ageOnPlanet;
-      }
+      return this.checkMortality(ageOnPlanet, jupiterAvg);
     } else {
-      if(ageOnPlanet > earthAvg) {
-        return 'you\'re dead';
-      } else {
-        lifeExpectancy = earthAvg - ageOnPlanet;
-      }
+      return this.checkMortality(ageOnPlanet, earthAvg);
     }
-
-    return parseFloat(lifeExpectancy.toFixed(2));
   }
-
 }//Class ends

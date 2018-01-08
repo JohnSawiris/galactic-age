@@ -82,42 +82,30 @@ var Person = exports.Person = function () {
           jupiterAvg = earthAvg * this.jupiter;
 
       var planet = this.planet,
-          ageOnPlanet = this.planetYear(),
-          lifeExpectancy = 0;
+          ageOnPlanet = this.planetYear();
 
       if (planet === "mercury") {
-        if (ageOnPlanet > mercuryAvg) {
-          return 'you\'re dead';
-        } else {
-          lifeExpectancy = mercuryAvg - ageOnPlanet;
-        }
+        return this.checkMortality(ageOnPlanet, mercuryAvg);
       } else if (planet === "venus") {
-        if (ageOnPlanet > venusAvg) {
-          return 'you\'re dead';
-        } else {
-          lifeExpectancy = venusAvg - ageOnPlanet;
-        }
+        return this.checkMortality(ageOnPlanet, venusAvg);
       } else if (planet === "mars") {
-        if (ageOnPlanet > marsAvg) {
-          return 'you\'re dead';
-        } else {
-          lifeExpectancy = marsAvg - ageOnPlanet;
-        }
+        return this.checkMortality(ageOnPlanet, marsAvg);
       } else if (planet === "jupiter") {
-        if (ageOnPlanet > jupiterAvg) {
-          return 'you\'re dead';
-        } else {
-          lifeExpectancy = jupiterAvg - ageOnPlanet;
-        }
+        return this.checkMortality(ageOnPlanet, jupiterAvg);
       } else {
-        if (ageOnPlanet > earthAvg) {
-          return 'you\'re dead';
-        } else {
-          lifeExpectancy = earthAvg - ageOnPlanet;
-        }
+        return this.checkMortality(ageOnPlanet, earthAvg);
       }
-
-      return parseFloat(lifeExpectancy.toFixed(2));
+    }
+  }, {
+    key: "checkMortality",
+    value: function checkMortality(age, agePlanet) {
+      var lifeExpectancy = 0;
+      if (age > agePlanet) {
+        return 'you\'re dead';
+      } else {
+        lifeExpectancy = agePlanet - age;
+        return parseFloat(lifeExpectancy.toFixed(2));
+      }
     }
   }]);
 
